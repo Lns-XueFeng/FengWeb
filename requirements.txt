@@ -15,3 +15,4 @@ Werkzeug==2.2.2
 WTForms==3.0.1
 zipp==3.11.0
 Bootstrap-Flask==2.2.0
+Flask-Ckeditor==0.4.6

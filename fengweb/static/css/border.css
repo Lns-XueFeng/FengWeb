@@ -1,0 +1,82 @@
+/*导航*/
+.BlogAnchor {
+    //background: #f1f1f1;
+    background: #DDDDDD;
+    padding: 5px;
+    line-height: 180%;
+    position: fixed;
+    left: 0px;   // right: 48px;
+    top: 0px;
+    border: 5px solid #f1f1f1;
+    width: 16%;
+    height:100%;
+}
+.BlogAnchor p {
+    font-size: 20px;
+    color: #aaaaaa;
+    margin: 0 0 0.3rem 0;
+    text-align: left;
+}
+.BlogAnchor .AnchorContent {
+    //padding: 5px 0px;
+    overflow: auto;
+
+}
+.BlogAnchor li{
+    text-indent: 0.5rem;
+    font-size: 14px;
+    list-style: none;
+}
+.BlogAnchor li .nav_item{
+    padding: 0px;
+}
+.BlogAnchor li .item_h1{
+    margin-left: 0rem;
+}
+.BlogAnchor li .item_h2{
+    margin-left: 2rem;
+    font-size: 0.8rem;
+}
+
+.BlogAnchor li .item_h3{
+    margin-left: 4rem;
+    font-size: 0.8rem;
+}
+
+.BlogAnchor li .item_h4{
+    margin-left: 5rem;
+    font-size: 0.8rem;
+}
+
+.BlogAnchor li .item_h5{
+    margin-left: 6rem;
+    font-size: 0.8rem;
+}
+
+
+.BlogAnchor li .item_h6{
+    margin-left: 7rem;
+    font-size: 0.8rem;
+}
+
+.BlogAnchor li .nav_item.current{
+    color: black;
+    background-color: #DDDDDD;
+}
+//目录标
+#AnchorContentToggle {
+    font-size: 13px;
+    font-weight: normal;
+    color: #FFF;
+    display: inline-block;
+    line-height: 20px;
+    background: #888888;
+    font-style: normal;
+    padding: 1px 8px;
+}
+.BlogAnchor a:hover {
+    color: 	#888888;
+}
+.BlogAnchor a {
+    text-decoration: none;
+}
