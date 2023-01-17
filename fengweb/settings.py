@@ -4,7 +4,6 @@ import sys
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-# SQLite URI compatible
 WIN = sys.platform.startswith('win')
 if WIN:
     prefix = 'sqlite:///'
@@ -23,7 +22,7 @@ class BaseConfig(object):
     CKEDITOR_ENABLE_CSRF = True
     CKEDITOR_FILE_UPLOADER = "admin.upload_image"
 
-    BLUELOG_POST_PER_PAGE = 10
+    BLUELOG_POST_PER_PAGE = 6
     BLUELOG_MANAGE_POST_PER_PAGE = 15
     # ("theme name", "display name")
     BLUELOG_THEMES = {"perfect_blue": "Perfect Blue", "black_swan": "Black Swan"}
@@ -40,7 +39,7 @@ class DevelopmentConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # in-memory database
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
 
 
 class ProductionConfig(BaseConfig):
@@ -52,4 +51,3 @@ config = {
     "production": ProductionConfig,
     "test": TestingConfig,
 }
-

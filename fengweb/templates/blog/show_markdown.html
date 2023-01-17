@@ -1,0 +1,16 @@
+ <html lang="zh-cn">
+	<head>
+		<title> Pie｜Md </title>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+		<link href="{{url_for('static',filename='css/display1.css')}}" rel="stylesheet">
+		<link href="{{url_for('static',filename='css/display2.css')}}" rel="stylesheet" type="text/css"/>
+		<script src="{{ url_for('static', filename='js/jquery.slim.min.js') }}"></script>
+	</head>
+	<body>
+		<div class="right" style="margin-left:40px;width:1000px"> {{ content }} </div>
+		<p style="text-align:right"></p>
+		<div style="text-align:center">Copyright @ 2022 <a href="#">回到古代见李白</a></div>
+	</body>
+
+    <script src="{{ url_for('static', filename='js/md_border.js') }}"></script>
+</html>
