@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %} Pie｜Home {% endblock %}
+
+{% block name %} <h3> {{ post.title }} </h3> {% endblock %}
+
+{% block text_typing %}
+    <h4 style="color:white;">{{ moment(post.timestamp).format('LL') }} </h4>
+{% endblock %}
+
+{% block content %}
+    
+<div class="arlo_tm_section" id="services">
+	<div class="arlo_tm_services">
+        <div class="arlo_tm_main_title" style="text-align:center">
+            <h3> <a href="#">{{ post.category.name }}</a></h3>
+        </div>
+		<div class="container">
+			<hr>
+			<p>{{ post.body|safe }}</p>
+			<hr>
+		</div>
+        <div class="arlo_tm_main_title" style="text-align:center">
+            <h3><a href="#">编辑文章</a></h3>
+        </div>
+	</div>
+</div>
+
+{% endblock %}

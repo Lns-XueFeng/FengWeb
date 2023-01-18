@@ -2,54 +2,66 @@
 
 {% block title %} Pie｜Home {% endblock %}
 
+{% block name %} <h3>音乐 <span>列表</span></h3> {% endblock %}
+
 {% block content %}
 
-<!-- /TOPBAR --><!-- HERO -->
-{#<div class="arlo_tm_hero" id="home">#}
-{#	<div class="background">#}
-{#		<div class="image" data-img-url="../../static/images/B冻山.jpg"></div>#}
-{#		<div class="overlay"></div>#}
-{#	</div>#}
-{##}
-{#	<div class="content">#}
-{#		<div class="image_wrap">#}
-{#			<div class="main" data-img-url="../../static/images/T爱因斯坦.jpg">#}
-{##}
-{#			</div>#}
-{#		</div>#}
-{#		<div class="name_holder">#}
-{#			<h3>轻松一刻 <span>音乐</span></h3>#}
-{#		</div>#}
-{#		<div class="text_typing">#}
-{#			<p>&nbsp;<span class="arlo_tm_animation_text_word"></span>&nbsp;</p>#}
-{#		</div>#}
-{#	</div>#}
-{#	<!-- mao点 -->#}
-{#	<div class="arlo_tm_arrow_wrap bounce anchor">#}
-{#		<a href="#services"><i class="xcon-angle-double-down"></i></a>#}
-{#	</div>#}
-{#</div>#}
-<!-- /HERO -->
-
-<!-- SERVICES -->
 <div class="arlo_tm_section" id="services">
 	<div class="arlo_tm_services">
 		<div class="container">
 			<hr>
 			<div class="service_inner">
 				<ul>
-					<li class="wow fadeInLeft" data-wow-duration="1.5s">
-						<div class="inner" style="text-align:center">
-							<img class="svg" src="../../static/images/1.svg" alt="" />
-							<a href="#"><h3>M</h3></a>
-							<p>......</p>
-						</div>
-					</li>
+                    {% for music in music_list %}
+                        <li class="wow fadeInLeft" data-wow-duration="1.5s">
+                            <div class="inner" style="text-align:center">
+                                <img class="svg" src="../../static/images/1.svg" alt="" />
+                                <div>
+                                    <audio id="{{ 'audio'+music[0] }}" src="/static/musics/{{ music[1] }}.mp3" preload="auto"></audio>
+                                </div>
+                                <div style="text-align:center">
+                                    <h5 id = "{{ 'music_name'+music[0] }}">{{ music[1] }}</h5>
+                                    <button id="{{ 'btn_play'+music[0] }}">点击播放</button>
+                                    <button id="{{ 'btn_stop'+music[0] }}">点击暂停</button>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
 				</ul>
+                <hr>
 			</div>
-			<hr>
 		</div>
 	</div>
 </div>
 
+<script language="javascript">
+    let obj_list = Array()
+    for (let i=1;i<=6;){
+        let audio = document.getElementById("audio"+i);
+        let btn_play = document.getElementById("btn_play"+i);
+        let btn_stop = document.getElementById("btn_stop"+i);
+        let three_list = Array(audio, btn_play, btn_stop)
+        obj_list.push(three_list);
+        i++;
+    }
+    console.log(obj_list);
+    for (let three in obj_list){
+        let audio = three[0]
+        let btn_p = three[1]
+        let btn_s = three[2]
+        btn_p.addEventListener('click', function (){
+            console.log(1)
+            if(audio.paused){
+				audio.play();
+			}
+        })
+        btn_s.addEventListener('click', function (){
+            if(audio.played){
+				audio.pause();
+			}
+        })
+    }
+</script>
+
 {% endblock %}
+

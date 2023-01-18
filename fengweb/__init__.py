@@ -3,14 +3,11 @@ import click
 
 from flask import Flask
 
-from .extensions import bootstrap4, db, login_manager, ckeditor
+from .extensions import bootstrap4, db, login_manager, ckeditor, moment
 from .blueprints.blog import blog_bp
 from .blueprints.admin import admin_bp
 from .blueprints.auth import auth_bp
 from .settings import config
-
-
-base_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 def make_app(config_name=None):
@@ -28,6 +25,7 @@ def make_app(config_name=None):
     db.init_app(app)
     login_manager.init_app(app)
     ckeditor.init_app(app)
+    moment.init_app(app)
 
     register_commands(app)
 
@@ -50,7 +48,7 @@ def register_commands(app):
     @click.option('--post', default=50, help='Quantity of posts, default is 50.')
     def forge(category, post):
         """Generate fake data."""
-        from fengweb.fakes import fake_categories, fake_posts, fake_links
+        from fengweb.fakes import fake_categories, fake_posts, fake_links, set_notes, fake_message
 
         db.drop_all()
         db.create_all()
@@ -63,5 +61,11 @@ def register_commands(app):
 
         click.echo('Generating links...')
         fake_links()
+
+        click.echo("Generating name title about for notes...")
+        set_notes()
+
+        click.echo("Generating messages...")
+        fake_message()
 
         click.echo('Done.')

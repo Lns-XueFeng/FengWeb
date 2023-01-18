@@ -8,20 +8,11 @@
 		<title>{% block title %} {% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/n_plugins.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/n_style.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/1.svg')}}">
     	<link rel="icon" href="{{ url_for('static', filename='images/1.svg') }}" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:200i,300,300i,400,400i,500,500i,600,700,700i,800&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	</head>
-	<!-- /PRELOADER --><!-- WRAPPER ALL -->
 	<body class="arlo_tm_all_wrap" data-magic-cursor="" data-color="crimson">
-{#		<div class="arlo_tm_preloader">#}
-{#			<div class="spinner_wrap">#}
-{#				<div class="spinner"></div>#}
-{#			</div>#}
-{#		</div>#}
-		<!-- 移动端栏 --><!-- 顶栏 -->
 		<div class="arlo_tm_mobile_menu">
 			<div class="mobile_menu_inner">
 				<div class="container">
@@ -51,7 +42,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- PC端栏 --><!-- 顶栏 -->
 		<div class="arlo_tm_topbar">
 			<div class="container">
 				<div class="topbar_inner">
@@ -71,8 +61,6 @@
 				</div>
 			</div>
 		</div>
-
-        <!-- 名称从数据库取 链接改为url_for形式 -->
         <div class="arlo_tm_hero" id="home">
             <div class="background">
                 <div class="image" data-img-url="../../static/images/B冻山.jpg"></div>
@@ -81,18 +69,17 @@
 
             <div class="content">
                 <div class="image_wrap">
-                    <div class="main" data-img-url="../../static/images/T爱因斯坦.jpg">
-
-                    </div>
+                    <div class="main" data-img-url="../../static/images/T爱因斯坦.jpg"></div>
                 </div>
                 <div class="name_holder">
-                    <h3>回到古代见 <span>李白</span></h3>
+                    {% block name %} <h3>回到古代见 <span>李白</span></h3> {% endblock %}
                 </div>
-                <div class="text_typing">
-                    <p>&nbsp;<span class="arlo_tm_animation_text_word"></span>&nbsp;</p>
-                </div>
+                {% block text_typing %}
+                    <div class="text_typing">
+                        <p>&nbsp;<span class="arlo_tm_animation_text_word"></span>&nbsp;</p>
+                    </div>
+                {% endblock %}
             </div>
-            <!-- mao点 -->
             <div class="arlo_tm_arrow_wrap bounce anchor">
                 <a href="#services"><i class="xcon-angle-double-down"></i></a>
             </div>
@@ -102,27 +89,24 @@
 
 		<!-- 版权栏 -->
 		<div style="text-align:center;background-color:white;">
-			<ul class="list-inline text-center"><hr>
-{#				<li class="list-inline-item">#}
-{#					<img src="../static/images/公众号.jpg">#}
-{#				</li>#}
-{#				<br>#}
+			<ul class="list-inline text-center">
 				<li class="list-inline-item">
-					<div style="font-size:18px">
+					<div style="font-size:18px"><br>
 						<h5>
                             个人<a href="#" title="Lns-XueFeng" style="color:brown;text-decoration:none;">Github</a>主页 |
                             个人<a href="#" title="你的小爬虫" style="color:brown;text-decoration:none;">公众号</a>主页<br>
                             Copyright @ 2022 <a href="#" style="color:brown;text-decoration:none;">回到古代见李白</a><br>
                             本网站背景与头像绘画作品均归<a href="#" style="color:brown;text-decoration:none;">Apr.L</a>所有
-                            <hr>
                         </h5>
 					</div>
 				</li>
 			</ul>
 		</div>
+    <script src="../static/js/bootstrap.min.js"></script>
 	<script src="../static/js/n_jquery.js"></script>
 	<script src="../static/js/n_plugins.js"></script>
 	<script src="../static/js/n_init.js"></script>
-	<script async defer src="http://www.google.cn/maps/api/js?key=AIzaSyA5bpEs3xlB8vhxNFErwoo3MXR64uavf6Y&callback=initMap"></script>
-	</body>
+	{{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
+    {{ moment.lang('zh-CN') }}
+    </body>
 </html>

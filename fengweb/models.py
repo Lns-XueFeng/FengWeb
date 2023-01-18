@@ -40,7 +40,6 @@ class Post(db.Model):
     title = db.Column(db.String(60))
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
-    can_comment = db.Column(db.Boolean, default=True)
 
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', back_populates='posts')
@@ -54,10 +53,13 @@ class Link(db.Model):
 
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(30))
+    name = db.Column(db.String(30))
+    title = db.Column(db.String(60))
     about = db.Column(db.Text)
 
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30))
     about = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)

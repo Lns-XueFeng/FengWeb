@@ -3,16 +3,17 @@
 
 {% block title %} Pie｜Home {% endblock %}
 
+{% block name %} <h3>原创文章 <span>列表</span></h3> {% endblock %}
+
 {% block content %}
 
-<!-- SERVICES -->
 <div class="arlo_tm_section" id="services">
 	<div class="arlo_tm_services">
+        <div class="arlo_tm_main_title" style="text-align:center">
+{#            等后台管理开发完毕，写选择语句，如果是管理员则显示 发布文章，否则不显示#}
+            <h3><a href="#">发布文章</a></h3>
+        </div>
 		<div class="container">
-			<div class="arlo_tm_main_title" style="text-align:center">
-				<h3>文章列表</h3>
-				<span>建议使用电脑浏览器浏览下面的文章以拥有最佳体验</span>
-			</div>
 			<hr>
 			<div class="service_inner">
 				<ul>
@@ -20,26 +21,24 @@
                         {% for post in posts %}
                             <li class="wow fadeInLeft" data-wow-duration="1.5s">
                                 <div class="inner" style="text-align:center">
-                                    {#<img class="svg" src="../../static/images/4.svg" alt="" />#}
                                     <h6><a href="{{ url_for('blog.detail_passage', post_id=post.id) }}">{{ post.title }}</a></h6><hr>
                                     <p>
                                         {{ post.body|striptags|truncate }}
                                         <a href="{{ url_for('blog.detail_passage', post_id=post.id) }}">Read More</a>
                                     </p><hr>
                                     <small>
-                                        <span style="float:left;">Category: <a href="#">{{ post.category.name }}</a></span>
-                                        <span style="float:right;">Jun 10.1</span>
-{#                                        <span style="float:right;">{{ moment(post.timestamp).format('LL') }}</span>#}
+                                        <span class="float-left">Category: <a href="#">{{ post.category.name }}</a></span>
+                                        <span class="float-right">{{ moment(post.timestamp).format('LL') }}</span>
                                     </small>
                                 </div>
                             </li>
                         {% endfor %}
                     {% else %}
                         <div>
-                            <h5>No posts yet.</h5>
-                            {% if current_user.is_authenticated %}
-                                <a href="{{ url_for('admin.new_post') }}">Write Now</a>
-                            {% endif %}
+                            <h3>No posts.</h3>
+{#                            {% if current_user.is_authenticated %}#}
+{#                                <a href="{{ url_for('admin.new_post') }}">Write Now</a>#}
+{#                            {% endif %}#}
                         </div>
                     {% endif %}
 				</ul>

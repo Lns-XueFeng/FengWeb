@@ -1,31 +1,11 @@
 {% extends 'base.html' %}
+{% from 'bootstrap4/pagination.html' import render_pager %}
 
 {% block title %} Pie｜Talk {% endblock %}
 
+{% block name %} <h3>留言 <span>列表</span></h3> {% endblock %}
+
 {% block content %}
-{#<div class="arlo_tm_hero" id="home">#}
-{#	<div class="background">#}
-{#		<div class="image" data-img-url="../../static/img/B遗迹.jpg"></div>#}
-{#		<div class="overlay"></div>#}
-{#	</div>#}
-{##}
-{#	<div class="content">#}
-{#		<div class="image_wrap">#}
-{#			<div class="main" data-img-url="../..static/img/T沉思.jpg"></div>#}
-{#		</div>#}
-{#		<div class="name_holder">#}
-{#			<h3>留言 <span>记录墙</span></h3>#}
-{#		</div>#}
-{#		<div class="text_typing">#}
-{#			<p>&nbsp;<span class="arlo_tm_animation_text_word"></span>&nbsp;</p>#}
-{#		</div>#}
-{#	</div>#}
-{#	<!-- mao点 -->#}
-{#	<div class="arlo_tm_arrow_wrap bounce anchor">#}
-{#		<a href="#services"><i class="xcon-angle-double-down"></i></a>#}
-{#	</div>#}
-{#</div>#}
-<!-- /HERO -->
 
 <!-- SERVICES -->
 <div class="arlo_tm_section" id="services">
@@ -36,20 +16,30 @@
                     <span><a href="#" style="color: #8888;"><h2>留下你想说的话</h2></a></span><hr>
                     <div>
 						<div class="service_inner">
-							<ul>
-{#							{% for i in message_list %}#}
-{#								<li class="wow fadeInLeft" data-wow-duration="1.5s">#}
-{#									<p style="font-size:5px">{{ i[0] }}</p>#}
-{#								<div class="inner">#}
-{#									<img class="svg" src="../../static/images/5.svg" alt="" />#}
-{#									<h3>{{ i.title }}</h3>#}
-{#									<p>{{ i.body|safe }}</p>#}
-{#								</div>#}
-{#								</li>#}
-{#							{% endfor %}#}
-							</ul>
+                            {% if message_list %}
+                                <ul>
+                                    {% for message in message_list %}
+                                        <li class="wow fadeInLeft" data-wow-duration="1.5s">
+{#                                            <p style="font-size:5px">{{ message.id }}</p>#}
+                                        <div class="inner">
+                                            <img class="svg" src="../../static/images/5.svg" alt="" />
+                                            <h3>{{ message.name }}</h3>
+                                            <p>{{ message.about|safe }}</p>
+                                            <small>{{ moment(message.timestamp).format('LL') }}</small>
+                                        </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <h3>No message.</h3>
+                            {% endif %}
+                            <hr>
+                            <div class="arlo_tm_main_title">
+                                {% if message_list %}
+                                    <div><h5>{{ render_pager(pagination) }}</h5></div>
+                                {% endif %}
+                            </div>
 						</div>
-						<hr>
                     </div>
                 </div>
 			</div>
