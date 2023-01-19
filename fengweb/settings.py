@@ -24,8 +24,6 @@ class BaseConfig(object):
 
     BLUELOG_POST_PER_PAGE = 6
     BLUELOG_MANAGE_POST_PER_PAGE = 15
-    # ("theme name", "display name")
-    BLUELOG_THEMES = {"perfect_blue": "Perfect Blue", "black_swan": "Black Swan"}
     BLUELOG_SLOW_QUERY_THRESHOLD = 1
 
 

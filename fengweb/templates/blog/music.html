@@ -34,34 +34,7 @@
 	</div>
 </div>
 
-<script language="javascript">
-    let obj_list = Array()
-    for (let i=1;i<=6;){
-        let audio = document.getElementById("audio"+i);
-        let btn_play = document.getElementById("btn_play"+i);
-        let btn_stop = document.getElementById("btn_stop"+i);
-        let three_list = Array(audio, btn_play, btn_stop)
-        obj_list.push(three_list);
-        i++;
-    }
-    console.log(obj_list);
-    for (let three in obj_list){
-        let audio = three[0]
-        let btn_p = three[1]
-        let btn_s = three[2]
-        btn_p.addEventListener('click', function (){
-            console.log(1)
-            if(audio.paused){
-				audio.play();
-			}
-        })
-        btn_s.addEventListener('click', function (){
-            if(audio.played){
-				audio.pause();
-			}
-        })
-    }
-</script>
-
 {% endblock %}
+
+{% block music %} {% endblock %}
 

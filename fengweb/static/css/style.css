@@ -1,0 +1,23 @@
+.box {
+    display: flex;
+    width: 60px;
+    background-color: darkred;
+    opacity:0.8;
+    border: darkred solid 5px;
+    position: fixed;
+    right: 4px;
+    bottom: 4px;
+    border-radius: 30px;
+    z-index: 1;
+}
+
+input {
+    width: 60px;
+    font-size: 15px;
+    border-radius: 20px;
+    border: solid darkred 2px;
+    margin: 0 auto;
+    background-color: darkred;
+    position: relative;
+    bottom: 1px;
+}

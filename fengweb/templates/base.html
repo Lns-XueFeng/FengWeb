@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/n_plugins.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/n_style.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}" />
 		<link rel="shortcut icon" href="{{ url_for('static', filename='images/1.svg')}}">
     	<link rel="icon" href="{{ url_for('static', filename='images/1.svg') }}" type="image/x-icon">
 	</head>
@@ -86,8 +87,13 @@
         </div>
 
         {% block content %} {% endblock %}
+        {% block music %}
+            <div class="box">
+                <audio src="/static/musics/世面.mp3"></audio>
+                <input type="button" value="播放">
+            </div>
+        {% endblock %}
 
-		<!-- 版权栏 -->
 		<div style="text-align:center;background-color:white;">
 			<ul class="list-inline text-center">
 				<li class="list-inline-item">
@@ -106,6 +112,7 @@
 	<script src="../static/js/n_jquery.js"></script>
 	<script src="../static/js/n_plugins.js"></script>
 	<script src="../static/js/n_init.js"></script>
+    <script src="../static/js/script.js"></script>
 	{{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
     {{ moment.lang('zh-CN') }}
     </body>
