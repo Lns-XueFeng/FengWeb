@@ -1,13 +1,17 @@
 import os
 import click
+import random
 
-from flask import Flask
+from flask import Flask, g
 
 from .extensions import bootstrap4, db, login_manager, ckeditor, moment
 from .blueprints.blog import blog_bp
 from .blueprints.admin import admin_bp
 from .blueprints.auth import auth_bp
 from .settings import config
+
+
+base_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 def make_app(config_name=None):
@@ -28,6 +32,7 @@ def make_app(config_name=None):
     moment.init_app(app)
 
     register_commands(app)
+    register_global(app)
 
     return app
 
@@ -69,3 +74,13 @@ def register_commands(app):
         fake_message()
 
         click.echo('Done.')
+
+
+def register_global(app):
+    @app.context_processor
+    def get_rand_music():
+        path = base_dir + "\\static\\musics"
+        all_files = os.listdir(path)
+        rand_music = random.choice(all_files).split(".")[0]
+        return {"rand_music": rand_music}
+

@@ -37,7 +37,11 @@
                             <li><a href="{{ url_for('blog.messages') }}">留言列表</a></li>
                             <li><a href="{{ url_for('blog.music') }}">音乐列表</a></li>
 							<li><a href="{{ url_for('blog.about') }}">关于我</a></li>
-                            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                            {% if not current_user.is_authenticated %}
+                                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('auth.login') }}">Logout</a></li>
+                            {% endif %}
 						</ul>
 					</div>
 				</div>
@@ -56,7 +60,11 @@
                             <li><a href="{{ url_for('blog.messages') }}">留言列表</a></li>
                             <li><a href="{{ url_for('blog.music') }}">音乐列表</a></li>
 							<li><a href="{{ url_for('blog.about') }}">关于我</a></li>
-                            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                            {% if not current_user.is_authenticated %}
+                                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('auth.login') }}">Logout</a></li>
+                            {% endif %}
 						</ul>
 					</div>
 				</div>
@@ -67,7 +75,7 @@
                 <div class="image" data-img-url="../../static/images/B冻山.jpg"></div>
                 <div class="overlay"></div>
             </div>
-
+            {% block login %}
             <div class="content">
                 <div class="image_wrap">
                     <div class="main" data-img-url="../../static/images/T爱因斯坦.jpg"></div>
@@ -81,6 +89,7 @@
                     </div>
                 {% endblock %}
             </div>
+            {% endblock %}
             <div class="arlo_tm_arrow_wrap bounce anchor">
                 <a href="#services"><i class="xcon-angle-double-down"></i></a>
             </div>
@@ -89,25 +98,27 @@
         {% block content %} {% endblock %}
         {% block music %}
             <div class="box">
-                <audio src="/static/musics/世面.mp3"></audio>
+                <audio src="/static/musics/{{ rand_music }}.mp3"></audio>
                 <input type="button" value="播放">
             </div>
         {% endblock %}
 
-		<div style="text-align:center;background-color:white;">
-			<ul class="list-inline text-center">
-				<li class="list-inline-item">
-					<div style="font-size:18px"><br>
-						<h5>
-                            个人<a href="#" title="Lns-XueFeng" style="color:brown;text-decoration:none;">Github</a>主页 |
-                            个人<a href="#" title="你的小爬虫" style="color:brown;text-decoration:none;">公众号</a>主页<br>
-                            Copyright @ 2022 <a href="#" style="color:brown;text-decoration:none;">回到古代见李白</a><br>
-                            本网站背景与头像绘画作品均归<a href="#" style="color:brown;text-decoration:none;">Apr.L</a>所有
-                        </h5>
-					</div>
-				</li>
-			</ul>
-		</div>
+        {% block banquan %}
+            <div style="text-align:center;background-color:white;">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <div style="font-size:18px"><br>
+                            <h5>
+                                个人<a href="#" title="Lns-XueFeng" style="color:brown;text-decoration:none;">Github</a>主页 |
+                                个人<a href="#" title="你的小爬虫" style="color:brown;text-decoration:none;">公众号</a>主页<br>
+                                Copyright @ 2022 <a href="#" style="color:brown;text-decoration:none;">回到古代见李白</a><br>
+                                本网站背景与头像绘画作品均归<a href="#" style="color:brown;text-decoration:none;">Apr.L</a>所有
+                            </h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        {% endblock %}
     <script src="../static/js/bootstrap.min.js"></script>
 	<script src="../static/js/n_jquery.js"></script>
 	<script src="../static/js/n_plugins.js"></script>

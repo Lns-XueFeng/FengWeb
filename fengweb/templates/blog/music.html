@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Pie｜Home {% endblock %}
+{% block title %} Pie｜Music {% endblock %}
 
 {% block name %} <h3>音乐 <span>列表</span></h3> {% endblock %}
 
@@ -33,6 +33,28 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    let li_list = document.getElementsByTagName("li");
+    count = 1;
+    for (i in li_list){
+        let audio = document.getElementById("audio"+count);
+        let btn_play = document.getElementById("btn_play"+count);
+        let btn_stop = document.getElementById("btn_stop"+count);
+
+        btn_play.addEventListener('click', function (){
+            if(audio.paused){
+                audio.play();
+            }
+        })
+
+        btn_stop.addEventListener('click', function (){
+            if(audio.played){
+                audio.pause();
+            }
+        })
+    }
+</script>
 
 {% endblock %}
 

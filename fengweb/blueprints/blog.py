@@ -1,5 +1,4 @@
 import os
-import re
 
 from flask import Blueprint
 from flask import render_template, request, current_app, url_for
@@ -43,9 +42,9 @@ def music():
     path = base_dir + "\\static\\musics"
     all_files = os.listdir(path)
     music_list = []
-    for i in all_files:
+    for file in all_files:
         count = count + 1
-        song_name = re.findall(r"(.*?).mp3", i)[0]
+        song_name = file.split(".")[0]
         music_list.append((str(count), song_name))
     return render_template("blog/music.html", music_list=music_list)
 

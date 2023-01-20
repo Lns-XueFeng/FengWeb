@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    login
-</body>
-</html>
+{% extends "base.html" %}
+{% from "bootstrap4/form.html" import render_form %}
+
+{% block title %} Pie | Login {% endblock %}
+
+{% block login %}
+    <div class="content">
+        <h1>Login</h1>
+        {{ render_form(login_form) }}
+    </div>
+{% endblock %}
+
+{% block banquan %} {% endblock %}
