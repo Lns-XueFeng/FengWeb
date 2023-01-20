@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import render_template, flash
-from flask_login import current_user
+from flask_login import current_user, login_required, logout_user
 
 from fengweb.forms import LoginForm
 from fengweb.models import Admin
@@ -10,6 +10,7 @@ auth_bp = Blueprint("auth", __name__)
 
 
 @auth_bp.route("/login", methods=["GET", "POST"])
+@login_required
 def login():
     if current_user.is_authenticated:
         pass
@@ -28,3 +29,10 @@ def login():
         else:
             flash("用户不存在！")
     return render_template("auth/login.html", login_form=login_form)
+
+
+@auth_bp.route("/logout")
+@login_required
+def log_out():
+    logout_user()
+    flash("你已退出登录！")
