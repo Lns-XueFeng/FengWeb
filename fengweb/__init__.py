@@ -36,6 +36,8 @@ def make_app(config_name=None):
 
     register_commands(app)
     register_tempplate_context(app)
+    register_errors(app)
+    register_shell_context(app)
 
     return app
 
@@ -138,3 +140,9 @@ def register_errors(app):
     @app.errorhandler(CSRFError)
     def handle_csrf_error(e):
         return render_template('errors/400.html', description=e.description), 400
+
+
+def register_shell_context(app):
+    @app.shell_context_processor
+    def make_shell_context():
+        return dict(db=db, Admin=Admin, Post=Post, Category=Category)

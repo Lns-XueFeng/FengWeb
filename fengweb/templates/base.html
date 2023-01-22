@@ -33,14 +33,18 @@
 				<div class="container">
 					<div class="dropdown_inner">
 						<ul class="anchor_nav">
-							<li><a href="{{ url_for('blog.passages') }}">文章列表</a></li>
-                            <li><a href="{{ url_for('blog.messages') }}">留言列表</a></li>
-                            <li><a href="{{ url_for('blog.music') }}">音乐列表</a></li>
-							<li><a href="{{ url_for('blog.about') }}">关于我</a></li>
-                            {% if not current_user.is_authenticated %}
-                                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                            {% if current_user.is_authenticated %}
+                                <li><a href="{{ url_for('admin.upload_md') }}">上传文件</a></li>
+                                <li><a href="{{ url_for('admin.manage_passage') }}">管理文章</a></li>
+                                <li><a href="{{ url_for('admin.manage_message') }}">管理留言</a></li>
+                                <li><a href="{{ url_for('admin.manage_category') }}">管理分类</a></li>
+                                <li><a href="{{ url_for('auth.logout', next=request.full_path) }}">Logout</a></li>
                             {% else %}
-                                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                                <li><a href="{{ url_for('blog.passages') }}">文章列表</a></li>
+                                <li><a href="{{ url_for('blog.messages') }}">留言列表</a></li>
+                                <li><a href="{{ url_for('blog.music') }}">音乐列表</a></li>
+                                <li><a href="{{ url_for('blog.about') }}">关于我</a></li>
+                                <li><a href="{{ url_for('auth.login', next=request.full_path) }}">Login</a></li>
                             {% endif %}
 						</ul>
 					</div>
@@ -56,14 +60,18 @@
 					</div>
 					<div class="menu">
 						<ul class="anchor_nav">
-							<li><a href="{{ url_for('blog.passages') }}">文章列表</a></li>
-                            <li><a href="{{ url_for('blog.messages') }}">留言列表</a></li>
-                            <li><a href="{{ url_for('blog.music') }}">音乐列表</a></li>
-							<li><a href="{{ url_for('blog.about') }}">关于我</a></li>
-                            {% if not current_user.is_authenticated %}
-                                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+							{% if current_user.is_authenticated %}
+                                <li><a href="{{ url_for('admin.upload_md') }}">上传文件</a></li>
+                                <li><a href="{{ url_for('admin.manage_passage') }}">管理文章</a></li>
+                                <li><a href="{{ url_for('admin.manage_message') }}">管理留言</a></li>
+                                <li><a href="{{ url_for('admin.manage_category') }}">管理分类</a></li>
+                                <li><a href="{{ url_for('auth.logout', next=request.full_path) }}">Logout</a></li>
                             {% else %}
-                                <li><a href="{{ url_for('auth.login') }}">Logout</a></li>
+                                <li><a href="{{ url_for('blog.passages') }}">文章列表</a></li>
+                                <li><a href="{{ url_for('blog.messages') }}">留言列表</a></li>
+                                <li><a href="{{ url_for('blog.music') }}">音乐列表</a></li>
+                                <li><a href="{{ url_for('blog.about') }}">关于我</a></li>
+                                <li><a href="{{ url_for('auth.login', next=request.full_path) }}">Login</a></li>
                             {% endif %}
 						</ul>
 					</div>

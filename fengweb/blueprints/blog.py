@@ -64,3 +64,8 @@ def detail_passage(post_id):
 def show_notes(name):
     html_string = md_to_html("fengweb/static/markdown/{}.md".format(name))
     return render_template("blog/show_markdown.html", content=html_string)
+
+
+@blog_bp.route("/left_words")
+def left_words():
+    return render_template("blog/left_words.html")

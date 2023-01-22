@@ -13,16 +13,22 @@
 <div class="arlo_tm_section" id="services">
 	<div class="arlo_tm_services">
         <div class="arlo_tm_main_title" style="text-align:center">
-            <h3> <a href="#">{{ post.category.name }}</a></h3>
+            <h3> <a href="{{ url_for('blog.about') }}">回到古代见李白</a></h3>
         </div>
 		<div class="container">
 			<hr>
 			<p>{{ post.body|safe }}</p>
 			<hr>
 		</div>
-        <div class="arlo_tm_main_title" style="text-align:center">
-            <h3><a href="#">编辑文章</a></h3>
-        </div>
+        {% if current_user.is_authernticated %}
+            <div class="arlo_tm_main_title" style="text-align:center">
+                <h3><a href="{{ url_for('admin.edit_passage') }}">编辑文章</a></h3>
+            </div>
+        {% else %}
+                <div class="arlo_tm_main_title" style="text-align:center">
+                    <h3>分类:<a href="#">{{ post.category.name }}</a></h3>
+                </div>
+        {% endif %}
 	</div>
 </div>
 
