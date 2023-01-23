@@ -134,5 +134,6 @@
     <script src="../static/js/script.js"></script>
 	{{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
     {{ moment.lang('zh-CN') }}
+    {% block script %} {% endblock %}
     </body>
 </html>

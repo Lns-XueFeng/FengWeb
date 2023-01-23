@@ -1,10 +1,12 @@
 import os
 
 from flask import Blueprint
-from flask import render_template, request, current_app, url_for
+from flask import render_template, request, current_app
 
-from fengweb.utils import md_to_html
+from fengweb.utils import md_to_html, redirect_back
 from fengweb.models import Post, Notes, Message
+from fengweb.forms import LeftWords
+from fengweb.extensions import db
 
 
 blog_bp = Blueprint("blog", __name__)
@@ -31,7 +33,7 @@ def passages():
 def messages():
     page = request.args.get("page", 1, type=int)
     per_page = current_app.config["BLUELOG_POST_PER_PAGE"]
-    pagination = Message.query.paginate(page=page, per_page=per_page)
+    pagination = Message.query.order_by(Message.timestamp.desc()).paginate(page=page, per_page=per_page)
     message_list = pagination.items
     return render_template("blog/message_wall.html", pagination=pagination, message_list=message_list)
 
@@ -60,12 +62,25 @@ def detail_passage(post_id):
     return render_template("blog/detail_passage.html", post=post)
 
 
+@blog_bp.route("/category_passage/<int:category_id>")
+def category_passage(category_id):
+    pass
+
+
 @blog_bp.route("/show_notes/<name>")
 def show_notes(name):
     html_string = md_to_html("fengweb/static/markdown/{}.md".format(name))
     return render_template("blog/show_markdown.html", content=html_string)
 
 
-@blog_bp.route("/left_words")
+@blog_bp.route("/left_words", methods=["GET", "POST"])
 def left_words():
-    return render_template("blog/left_words.html")
+    form = LeftWords()
+    if form.validate_on_submit():
+        name = form.name.data
+        words = form.words.data
+        message = Message(name=name, about=words)
+        db.session.add(message)
+        db.session.commit()
+        return redirect_back()
+    return render_template("blog/left_words.html", form=form)

@@ -36,7 +36,7 @@
 
 <script>
     let li_list = document.getElementsByTagName("li");
-    count = 1;
+    let count = 1;
     for (i in li_list){
         let audio = document.getElementById("audio"+count);
         let btn_play = document.getElementById("btn_play"+count);
@@ -53,6 +53,7 @@
                 audio.pause();
             }
         })
+        count = count + 1
     }
 </script>
 

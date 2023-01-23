@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% from 'bootstrap4/pagination.html' import render_pager %}
 
-</body>
-</html>
+{% block title %} Pie｜Manager {% endblock %}
+
+{% block name %} <h3>文章管理 <span>列表</span></h3> {% endblock %}
+
+{% block content %}
+
+<div class="arlo_tm_section" id="services">
+	<div class="arlo_tm_services">
+		<div class="container">
+			<div class="arlo_tm_main_title" style="text-align:center">
+				<div style="text-align:center">
+                    <span><h2><a href="{{ url_for("admin.new_passage") }}">写一篇新文章吧</a></h2></span><hr>
+                    <div>
+						<div class="service_inner">
+                            {% if posts %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>文章标题</th>
+                                        <th>文章分类</th>
+                                        <th>发表日期</th>
+                                        <th>文章字数</th>
+                                        <th>编辑文章</th>
+                                        <th>删除文章</th>
+                                    </tr>
+                                    </thead>
+                                    {% for post in posts %}
+                                    <tr>
+                                        <td>{{ loop.index + ((page - 1) * config.BLUELOG_MANAGE_POST_PER_PAGE) }}</td>
+                                        <td><a href="{{ url_for('blog.detail_passage', post_id=post.id) }}">{{ post.title }}</a></td>
+                                        <td><a href="{{ url_for('blog.category_passage', category_id=post.category.id) }}">{{ post.category.name }}</a>
+                                        </td>
+                                        <td>{{ moment(post.timestamp).format('LL') }}</td>
+                                        <td>{{ post.body|striptags|length }}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm" href="{{ url_for('.edit_passage', post_id=post.id) }}">Edit</a>
+                                        </td>
+                                        <td>
+                                            <form class="inline" method="post"
+                                                  action="{{ url_for('.delete_passage', post_id=post.id, next=request.full_path) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                <div class="page-footer">{{ render_pager(pagination) }}</div>
+                                {% else %}
+                                <div class="tip"><h5>No Passages.</h5></div>
+                                {% endif %}
+                            <hr>
+						</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

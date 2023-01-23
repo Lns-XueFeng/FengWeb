@@ -25,6 +25,7 @@ class BaseConfig(object):
     BLUELOG_POST_PER_PAGE = 6
     BLUELOG_MANAGE_POST_PER_PAGE = 15
     BLUELOG_SLOW_QUERY_THRESHOLD = 1
+    UPLOAD_MARKDOWN_PATH = basedir + "/fengweb/static/markdown/"
 
 
 class DevelopmentConfig(BaseConfig):
