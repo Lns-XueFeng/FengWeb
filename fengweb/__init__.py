@@ -5,7 +5,7 @@ import random
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFError
 
-from .models import Admin, Category, Link
+from .models import Admin, Category, Link, Post
 from .extensions import bootstrap4, db, login_manager, ckeditor, moment, csrf
 from .blueprints.blog import blog_bp
 from .blueprints.admin import admin_bp
