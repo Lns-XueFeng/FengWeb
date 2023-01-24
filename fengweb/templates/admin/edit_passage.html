@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% from 'bootstrap4/form.html' import render_form %}
 
-</body>
-</html>
+{% block title %} Pie｜Edit {% endblock %}
+
+{% block name %} <h3>编辑 <span>文章</span></h3> {% endblock %}
+
+{% block content %}
+
+<div class="arlo_tm_section" id="services">
+	<div class="arlo_tm_services">
+		<div class="container">
+			<div class="arlo_tm_main_title" style="text-align:center">
+				<div style="text-align:center"><hr>
+                    <div>
+						<div class="service_inner">
+                            {{ render_form(form) }}
+                            <hr>
+						</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+    {{ ckeditor.config(name='body') }}
+{% endblock %}

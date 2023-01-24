@@ -9,9 +9,15 @@
 
 <div class="arlo_tm_section" id="services">
 	<div class="arlo_tm_services">
-{#        <div class="arlo_tm_main_title" style="text-align:center">#}
-{#            <h3><a href="#">发布文章</a></h3>#}
-{#        </div>#}
+        {% if current_user.is_authenticated %}
+            <div class="arlo_tm_main_title" style="text-align:center">
+                <h3><a href="{{ url_for('admin.new_passage') }}">发布文章</a></h3>
+            </div>
+        {% else %}
+            <div class="arlo_tm_main_title" style="text-align:center">
+                <span>建议使用电脑浏览器浏览下面的文章以拥有最佳体验</span>
+            </div>
+        {% endif %}
 		<div class="container">
 			<hr>
 			<div class="service_inner">
@@ -35,9 +41,9 @@
                     {% else %}
                         <div>
                             <h3>No posts.</h3>
-{#                            {% if current_user.is_authenticated %}#}
-{#                                <a href="{{ url_for('admin.new_post') }}">Write Now</a>#}
-{#                            {% endif %}#}
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('admin.new_passage') }}">Write Now</a>
+                            {% endif %}
                         </div>
                     {% endif %}
 				</ul>

@@ -15,7 +15,7 @@
                     {% for music in music_list %}
                         <li class="wow fadeInLeft" data-wow-duration="1.5s">
                             <div class="inner" style="text-align:center">
-                                <img class="svg" src="../../static/images/1.svg" alt="" />
+                                <img class="svg" src="{{ url_for('static', filename='/images/1.svg') }}" alt="" />
                                 <div>
                                     <audio id="{{ 'audio'+music[0] }}" src="/static/musics/{{ music[1] }}.mp3" preload="auto"></audio>
                                 </div>

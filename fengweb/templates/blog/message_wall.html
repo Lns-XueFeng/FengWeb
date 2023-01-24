@@ -21,7 +21,7 @@
                                         <li class="wow fadeInLeft" data-wow-duration="1.5s">
 {#                                            <p style="font-size:5px">{{ message.id }}</p>#}
                                         <div class="inner">
-                                            <img class="svg" src="../../static/images/5.svg" alt="" />
+                                            <img class="svg" src="{{ url_for('static', filename='/images/5.svg') }}" alt="" />
                                             <h3>{{ message.name }}</h3>
                                             <p>{{ message.about|safe }}</p>
                                             <small>{{ moment(message.timestamp).format('LL') }}</small>

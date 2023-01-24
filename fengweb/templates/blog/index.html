@@ -8,7 +8,7 @@
 	<div class="arlo_tm_services">
         <div class="arlo_tm_main_title" style="text-align:center">
             <h3>笔记列表</h3>
-            <span>建议使用电脑浏览器浏览下面的文章以拥有最佳体验</span>
+            <span>建议使用电脑浏览器浏览下面的文档以拥有最佳体验</span>
         </div>
 		<div class="container">
 			<hr>
@@ -19,7 +19,7 @@
                         {% for note in notes %}
                         <li class="wow fadeInLeft" data-wow-duration="1.5s">
                             <div class="inner" style="text-align:center">
-                                <img class="svg" src="../../static/images/1.svg" alt="" />
+                                <img class="svg" src="{{ url_for('static', filename='/images/1.svg') }}" alt="" />
                                 <a href="{{ url_for("blog.show_notes", name=note.name) }}">
                                     <h3>{{ note.title }}</h3></a>
                                 <p>{{ note.about }}</p>
@@ -33,7 +33,7 @@
                 <hr>
 			</div>
 			<div class="arlo_tm_main_title" style="text-align:center">
-				<span>建议使用电脑浏览器浏览下面的文章以拥有最佳体验</span>
+				<span>建议使用电脑浏览器浏览下面的文档以拥有最佳体验</span>
                 {# 等后台管理开发完毕，写选择语句，如果是管理员则显示 上传笔记，否则显示 立刻行动 相当于一个快捷的入口#}
 				<h3>立刻行动</h3>
 			</div>

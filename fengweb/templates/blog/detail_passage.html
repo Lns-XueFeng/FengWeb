@@ -20,13 +20,13 @@
 			<p>{{ post.body|safe }}</p>
 			<hr>
 		</div>
-        {% if current_user.is_authernticated %}
+        {% if current_user.is_authenticated %}
             <div class="arlo_tm_main_title" style="text-align:center">
-                <h3><a href="{{ url_for('admin.edit_passage') }}">编辑文章</a></h3>
+                <h3><a href="{{ url_for('admin.edit_passage', post_id=post.id) }}">编辑文章</a></h3>
             </div>
         {% else %}
                 <div class="arlo_tm_main_title" style="text-align:center">
-                    <h3>分类:<a href="#">{{ post.category.name }}</a></h3>
+                    <h3><a href="#">{{ post.category.name }}</a></h3>
                 </div>
         {% endif %}
 	</div>
