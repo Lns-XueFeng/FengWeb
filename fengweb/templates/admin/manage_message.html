@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="arlo_tm_main_title" style="text-align:center">
 				<div style="text-align:center">
-                    <span><a href="{{ url_for('blog.left_words', next=request.full_path) }}"><h2>增加新留言</h2></a></span><hr>
+                    <span><a href="{{ url_for('blog.messages', next=request.full_path) }}"><h2>留言列表</h2></a></span><hr>
                     <div>
 						<div class="service_inner">
                             {% if messages %}

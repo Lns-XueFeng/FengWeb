@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% from 'bootstrap4/pagination.html' import render_pager %}
 
-</body>
-</html>
+{% block title %} Pie｜Manager {% endblock %}
+
+{% block name %} <h3>分类管理 <span>列表</span></h3> {% endblock %}
+
+{% block content %}
+
+<div class="arlo_tm_section" id="services">
+	<div class="arlo_tm_services">
+		<div class="container">
+			<div class="arlo_tm_main_title" style="text-align:center">
+				<div style="text-align:center">
+                    <span><h2><a href="{{ url_for("admin.new_category") }}">增加新分类</a></h2></span><hr>
+                    <div>
+						<div class="service_inner">
+                            {% if category_list %}
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>文章分类</th>
+                                        <th>编辑分类</th>
+                                        <th>删除分类</th>
+                                    </tr>
+                                    </thead>
+                                    {% for category in category_list %}
+                                    <tr>
+                                        <td>{{ category.id }}</td>
+                                        <td><a href="{{ url_for('blog.category_passage', category_id=category.id) }}">{{ category.name }}</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm" href="{{ url_for('admin.edit_category', category_id=category.id) }}">Edit</a>
+                                        </td>
+                                        <td>
+                                            <form class="inline" method="post"
+                                                  action="{{ url_for('admin.delete_category', category_id=category.id, next=request.full_path) }}">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                {% else %}
+                                <div class="tip"><h5>No Category.</h5></div>
+                                {% endif %}
+                            <hr>
+						</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

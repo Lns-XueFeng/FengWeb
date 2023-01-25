@@ -80,7 +80,7 @@
 						html: 'HTML',
 						http: 'HTTP',
 						ini: 'INI',
-						java: 'Java',
+						java: 'Java.md',
 						javascript: 'JavaScript',
 						json: 'JSON',
 						makefile: 'Makefile',

@@ -37,7 +37,7 @@ def manage_passage():
     return render_template("admin/manage_passage.html", page=page, pagination=pagination, posts=posts)
 
 
-@admin_bp.route("/new_passage", methods=["GET", "POST"])
+@admin_bp.route("/manage_passage/new_passage", methods=["GET", "POST"])
 @login_required
 def new_passage():
     form = PassageEdit()
@@ -53,7 +53,7 @@ def new_passage():
     return render_template("admin/new_passage.html", form=form)
 
 
-@admin_bp.route("/edit_passage/<int:post_id>", methods=["GET", "POST"])
+@admin_bp.route("/manage_passage/edit_passage/<int:post_id>", methods=["GET", "POST"])
 @login_required
 def edit_passage(post_id):
     form = PassageSubmit()
@@ -73,7 +73,7 @@ def edit_passage(post_id):
     return render_template("admin/edit_passage.html", form=form)
 
 
-@admin_bp.route("/delete_passage/<int:post_id>", methods=["GET", "POST"])
+@admin_bp.route("/manage_passage/delete_passage/<int:post_id>", methods=["GET", "POST"])
 @login_required
 def delete_passage(post_id):
     post = Post.query.get(post_id)
@@ -92,7 +92,7 @@ def manage_message():
     return render_template("admin/manage_message.html", page=page, pagination=pagination, messages=message_list)
 
 
-@admin_bp.route("/edit_message/<int:message_id>", methods=["GET", "POST"])
+@admin_bp.route("/manage_message/edit_message/<int:message_id>", methods=["GET", "POST"])
 @login_required
 def edit_message(message_id):
     form = MessageEdit()
@@ -109,7 +109,7 @@ def edit_message(message_id):
     return render_template("admin/edit_message.html", form=form)
 
 
-@admin_bp.route("/delete_message/<int:message_id>", methods=["GET", "POST"])
+@admin_bp.route("/manage_message/delete_message/<int:message_id>", methods=["GET", "POST"])
 @login_required
 def delete_message(message_id):
     message = Message.query.get(message_id)
@@ -121,4 +121,23 @@ def delete_message(message_id):
 @admin_bp.route("/manage_category")
 @login_required
 def manage_category():
-    return render_template("admin/manage_category.html")
+    category_list = Category.query.all()
+    return render_template("admin/manage_category.html", category_list=category_list)
+
+
+@admin_bp.route("/manage_category/new_category")
+@login_required
+def new_category():
+    pass
+
+
+@admin_bp.route("/manage_category/edit_category/<int:category_id>")
+@login_required
+def edit_category(category_id):
+    pass
+
+
+@admin_bp.route("/delete_category/<int:category_id>")
+@login_required
+def delete_category(category_id):
+    pass

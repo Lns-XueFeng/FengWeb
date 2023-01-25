@@ -4,7 +4,7 @@ from flask import Blueprint
 from flask import render_template, request, current_app
 
 from fengweb.utils import md_to_html, redirect_back
-from fengweb.models import Post, Notes, Message
+from fengweb.models import Post, Notes, Message, Category
 from fengweb.forms import LeftWords
 from fengweb.extensions import db
 
@@ -62,11 +62,6 @@ def detail_passage(post_id):
     return render_template("blog/detail_passage.html", post=post)
 
 
-@blog_bp.route("/category_passage/<int:category_id>")
-def category_passage(category_id):
-    pass
-
-
 @blog_bp.route("/show_notes/<name>")
 def show_notes(name):
     html_string = md_to_html("fengweb/static/markdown/{}.md".format(name))
@@ -84,3 +79,10 @@ def left_words():
         db.session.commit()
         return redirect_back()
     return render_template("blog/left_words.html", form=form)
+
+
+@blog_bp.route("/category_passage/<int:category_id>")
+def category_passage(category_id):
+    category = Category.query.get(category_id)
+    posts = category.posts
+    return render_template("blog/category_passages.html", posts=posts)

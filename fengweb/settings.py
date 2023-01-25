@@ -20,7 +20,6 @@ class BaseConfig(object):
     SQLALCHEMY_RECORD_QUERIES = True
 
     CKEDITOR_ENABLE_CSRF = True
-    CKEDITOR_FILE_UPLOADER = "admin.upload_image"
 
     BLUELOG_POST_PER_PAGE = 6
     BLUELOG_MANAGE_POST_PER_PAGE = 15

@@ -26,7 +26,7 @@
             </div>
         {% else %}
                 <div class="arlo_tm_main_title" style="text-align:center">
-                    <h3><a href="#">{{ post.category.name }}</a></h3>
+                    <h3><a href="{{ url_for('blog.category_passage', category_id=post.category.id) }}">{{ post.category.name }}</a></h3>
                 </div>
         {% endif %}
 	</div>
