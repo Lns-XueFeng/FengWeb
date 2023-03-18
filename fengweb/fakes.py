@@ -56,9 +56,9 @@ def fake_message():
 
 
 def set_notes():
-    name_list = ["Python", "Java", "Backend", "Algorithm", "Database", "Network"]
-    about_list = ["Python是人人都能学会的编程语言，本笔记包含Python简介，Python基础，Python进阶以及常用的库！",
-                  "Java，一个纯粹的面向对象编程语言，本笔记包含Java基础，Java进阶以及Web后端开发框架",
+    name_list = ["C", "Python", "Backend", "Algorithm", "Database", "Network"]
+    about_list = ["C语言古老而强大，简单而灵活，是其他语言的基石，比如Python的底层就是C进行的实现！",
+                  "Python是人人都能学会的编程语言，本笔记包含Python简介，Python基础，Python进阶以及常用的库！",
                   "Backend中将包含爬虫、前端三剑客、Flask框架以及个人网站项目，其中大多在Github中，这里只放置其链接！",
                   "编程语言只是我们的武器和招式，但数据结构和算法却是我们的内力，武器再好招式再多也比不过内力雄厚的至强之人！",
                   "熟练编写SQL操作数据库非常重要，在编程中总是会用到，本笔记将会包含SQL语句、MySQL的记录！",

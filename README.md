@@ -1,19 +1,15 @@
 ## FengWeb
 Lns-XueFeng的个人网站
 
-## Web开发流程
-#### 前端开发流程
-
-- 根据功能规格书画页面草图
-- 根据草图做交互式原型图
-- 根据原型图开发前端页面
-
-#### 后端开发流程
-
+## 开发流程
 - 数据库建模
 - 编写表单类
 - 编写视图函数和相关处理函数
 - 在页面中使用jinja2替换虚拟数据
+
+## 网站外观
+<img src="./index.png">
+
 
 ## 功能安排
 <img src="./function.jpg">
@@ -27,10 +23,12 @@ fengweb
          --- admin.py
          --- auth.py
      static
+         --- js
          --- css
          --- images
          --- musics
          --- markdown
+         --- ckeditor
      templates
          --- blog
          --- auth

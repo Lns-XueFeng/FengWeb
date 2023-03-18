@@ -35,7 +35,7 @@ def make_app(config_name=None):
     csrf.init_app(app)
 
     register_commands(app)
-    register_tempplate_context(app)
+    register_template_context(app)
     register_errors(app)
     register_shell_context(app)
 
@@ -47,71 +47,71 @@ def register_commands(app):
     @click.option('--drop', is_flag=True, help='Create after drop.')
     def initdb(drop):
         if drop:
-            click.confirm('This operation will delete the database, do you want to continue?', abort=True)
+            click.confirm('此操作将会删除数据库, 是否继续？', abort=True)
             db.drop_all()
-            click.echo('Drop tables.')
+            click.echo('已删除')
         db.create_all()
-        click.echo('Initialized database.')
+        click.echo('正在初始化数据库')
 
     @app.cli.command()
     @click.option('--category', default=10, help='Quantity of categories, default is 10.')
     @click.option('--post', default=50, help='Quantity of posts, default is 50.')
     def forge(category, post):
-        """Generate fake data."""
+        """生成一些假数据进行填充."""
         from fengweb.fakes import fake_categories, fake_posts, fake_links, set_notes, fake_message
 
         db.drop_all()
         db.create_all()
 
-        click.echo('Generating %d categories...' % category)
+        click.echo('生成ing %d categories...' % category)
         fake_categories(category)
 
-        click.echo('Generating %d posts...' % post)
+        click.echo('生成ing %d posts...' % post)
         fake_posts(post)
 
-        click.echo('Generating links...')
+        click.echo('生成ing links...')
         fake_links()
 
-        click.echo("Generating name title about for notes...")
+        click.echo("生成ing name title about for notes...")
         set_notes()
 
-        click.echo("Generating messages...")
+        click.echo("生成ing messages...")
         fake_message()
 
-        click.echo('Done.')
+        click.echo('生成完成')
 
     @app.cli.command()
     @click.option('--username', prompt=True, help='The username used to login.')
     @click.option('--password', prompt=True, hide_input=True,
                   confirmation_prompt=True, help='The password used to login.')
     def init(username, password):
-        """Building Bluelog, just for you."""
+        """建立管理员账户以及默认分类."""
 
-        click.echo('Initializing the database...')
+        click.echo('正在初始化数据库...')
         db.create_all()
 
         admin = Admin.query.first()
         if admin is not None:
-            click.echo('The administrator already exists, updating...')
+            click.echo('此管理员已经存在, 更新ing...')
             admin.username = username
             admin.set_password(password)
         else:
-            click.echo('Creating the temporary administrator account...')
+            click.echo('创建暂时的管理员账户...')
             admin = Admin(username=username)
             admin.set_password(password)
             db.session.add(admin)
 
         category = Category.query.first()
         if category is None:
-            click.echo('Creating the default category...')
+            click.echo('创建默认分类...')
             category = Category(name='Default')
             db.session.add(category)
 
         db.session.commit()
-        click.echo('Done.')
+        click.echo('创建完成')
 
 
-def register_tempplate_context(app):
+def register_template_context(app):
 
     @app.context_processor
     def make_template_context():

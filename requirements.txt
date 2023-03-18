@@ -16,3 +16,6 @@ WTForms==3.0.1
 zipp==3.11.0
 Bootstrap-Flask==2.2.0
 Flask-Ckeditor==0.4.6
+Flask_Moment==1.0.5
+Markdown==3.4.1
+faker==17.6.0
