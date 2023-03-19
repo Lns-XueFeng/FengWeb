@@ -23,7 +23,7 @@ def index():
 @blog_bp.route("/passages")
 def passages():
     page = request.args.get("page", 1, type=int)
-    per_page = current_app.config["BLUELOG_POST_PER_PAGE"]
+    per_page = current_app.config["FENGWEB_POST_PER_PAGE"]
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page, per_page=per_page)
     posts = pagination.items
     return render_template("blog/passages.html", pagination=pagination, posts=posts)
@@ -32,7 +32,7 @@ def passages():
 @blog_bp.route("/messages")
 def messages():
     page = request.args.get("page", 1, type=int)
-    per_page = current_app.config["BLUELOG_POST_PER_PAGE"]
+    per_page = current_app.config["FENGWEB_POST_PER_PAGE"]
     pagination = Message.query.order_by(Message.timestamp.desc()).paginate(page=page, per_page=per_page)
     message_list = pagination.items
     return render_template("blog/message_wall.html", pagination=pagination, message_list=message_list)

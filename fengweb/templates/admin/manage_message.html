@@ -30,7 +30,7 @@
                                     </thead>
                                     {% for message in messages %}
                                     <tr>
-                                        <td>{{ loop.index + ((page - 1) * config.BLUELOG_MANAGE_POST_PER_PAGE) }}</td>
+                                        <td>{{ loop.index + ((page - 1) * config.FENGWEB_MANAGE_POST_PER_PAGE) }}</td>
                                         <td>{{ message.name }}</td>
                                         <td>{{ message.about }}</td>
                                         <td>{{ moment(message.timestamp).format('LL') }}</td>

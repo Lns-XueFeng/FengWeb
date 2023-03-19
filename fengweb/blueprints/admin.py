@@ -31,7 +31,7 @@ def upload_md():
 @login_required
 def manage_passage():
     page = request.args.get("page", 1, type=int)
-    per_page = current_app.config["BLUELOG_MANAGE_MESSAGE_PER_PAGE"]
+    per_page = current_app.config["FENGWEB_MANAGE_MESSAGE_PER_PAGE"]
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page, per_page=per_page)
     posts = pagination.items
     return render_template("admin/manage_passage.html", page=page, pagination=pagination, posts=posts)
@@ -86,7 +86,7 @@ def delete_passage(post_id):
 @login_required
 def manage_message():
     page = request.args.get("page", 1, type=int)
-    per_page = current_app.config["BLUELOG_MANAGE_POST_PER_PAGE"]
+    per_page = current_app.config["FENGWEB_MANAGE_POST_PER_PAGE"]
     pagination = Message.query.order_by(Message.timestamp.desc()).paginate(page=page, per_page=per_page)
     message_list = pagination.items
     return render_template("admin/manage_message.html", page=page, pagination=pagination, messages=message_list)

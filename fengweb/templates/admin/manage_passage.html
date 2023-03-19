@@ -30,7 +30,7 @@
                                     </thead>
                                     {% for post in posts %}
                                     <tr>
-                                        <td>{{ loop.index + ((page - 1) * config.BLUELOG_MANAGE_POST_PER_PAGE) }}</td>
+                                        <td>{{ loop.index + ((page - 1) * config.FENGWEB_MANAGE_POST_PER_PAGE) }}</td>
                                         <td><a href="{{ url_for('blog.detail_passage', post_id=post.id) }}">{{ post.title }}</a></td>
                                         <td><a href="{{ url_for('blog.category_passage', category_id=post.category.id) }}">{{ post.category.name }}</a>
                                         </td>
