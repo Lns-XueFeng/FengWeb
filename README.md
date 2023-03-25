@@ -10,7 +10,7 @@ Lns-XueFeng的个人网站，利用Python-Flask、Jinja2、Bootstrap进行搭建
 - 数据库建模
 - 编写表单类
 - 编写视图函数和相关处理函数
-- 在页面中使用jinja2替换虚拟数据
+- 在页面中使用jinja2替换数据
 
 ## 网站外观
 <img src="./index.png">
