@@ -22,7 +22,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True)
 
-    posts = db.relationship('Post', back_populates='category')
+    posts = db.relationship("Post", back_populates="category")
 
     def delete(self):
         default_category = Category.query.get(1)
@@ -40,8 +40,8 @@ class Post(db.Model):
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    category = db.relationship('Category', back_populates='posts')
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"))
+    category = db.relationship("Category", back_populates="posts")
 
 
 class Link(db.Model):

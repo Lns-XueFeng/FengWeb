@@ -44,32 +44,32 @@ def make_app(config_name=None):
 
 def register_commands(app):
     @app.cli.command()
-    @click.option('--drop', is_flag=True, help='Create after drop.')
+    @click.option("--drop", is_flag=True, help="Create after drop")
     def initdb(drop):
+        """初始化数据库"""
         if drop:
-            click.confirm('此操作将会删除数据库, 是否继续？', abort=True)
+            click.confirm("此操作将会删除数据库, 是否继续？", abort=True)
             db.drop_all()
-            click.echo('已删除')
+            click.echo("已删除")
         db.create_all()
-        click.echo('正在初始化数据库')
+        click.echo("初始化数据库")
 
     @app.cli.command()
-    @click.option('--category', default=10, help='Quantity of categories, default is 10.')
-    @click.option('--post', default=50, help='Quantity of posts, default is 50.')
+    @click.option("--category", default=10, help="分类的数量, 默认为10")
+    @click.option("--post", default=50, help="文章的数量, 默认为50")
     def forge(category, post):
-        """生成一些假数据进行填充."""
+        """生成一些假数据进行填充"""
         from fengweb.fakes import fake_categories, fake_posts, fake_links, set_notes, fake_message
-
         db.drop_all()
         db.create_all()
 
-        click.echo('生成ing %d categories...' % category)
+        click.echo(f"生成ing {category} categories...")
         fake_categories(category)
 
-        click.echo('生成ing %d posts...' % post)
+        click.echo(f"生成ing {post} posts...")
         fake_posts(post)
 
-        click.echo('生成ing links...')
+        click.echo("生成ing links...}")
         fake_links()
 
         click.echo("生成ing name title about for notes...")
@@ -78,41 +78,38 @@ def register_commands(app):
         click.echo("生成ing messages...")
         fake_message()
 
-        click.echo('生成完成')
+        click.echo("生成完成")
 
     @app.cli.command()
-    @click.option('--username', prompt=True, help='The username used to login.')
-    @click.option('--password', prompt=True, hide_input=True,
-                  confirmation_prompt=True, help='The password used to login.')
-    def init(username, password):
-        """建立管理员账户以及默认分类."""
-
-        click.echo('正在初始化数据库...')
+    @click.option("--username", prompt=True, help="用户登录名称")
+    @click.option("--password", prompt=True, confirmation_prompt=True, help="用户登录密码")
+    def init_admin(username, password):
+        """建立管理员账户以及默认分类"""
+        click.echo("正在初始化数据库...")
         db.create_all()
 
         admin = Admin.query.first()
         if admin is not None:
-            click.echo('此管理员已经存在, 更新ing...')
+            click.echo("此管理员已存在, 更新ing...")
             admin.username = username
             admin.set_password(password)
         else:
-            click.echo('创建暂时的管理员账户...')
+            click.echo("创建管理员账户...")
             admin = Admin(username=username)
             admin.set_password(password)
             db.session.add(admin)
 
         category = Category.query.first()
         if category is None:
-            click.echo('创建默认分类...')
-            category = Category(name='Default')
+            click.echo("创建默认分类...")
+            category = Category(name="Default")
             db.session.add(category)
 
-        db.session.commit()
-        click.echo('创建完成')
+        db.seesion.commit()
+        click.echo("创建完成")
 
 
 def register_template_context(app):
-
     @app.context_processor
     def make_template_context():
         path = base_dir + "\\static\\musics"
@@ -127,19 +124,19 @@ def register_template_context(app):
 def register_errors(app):
     @app.errorhandler(400)
     def bad_request(e):
-        return render_template('errors/400.html'), 400
+        return render_template("error/400.html"), 400
 
     @app.errorhandler(404)
     def page_not_found(e):
-        return render_template('errors/404.html'), 404
+        return render_template("errors/404.html"), 404
 
     @app.errorhandler(500)
-    def internal_server_error(e):
-        return render_template('errors/500.html'), 500
+    def internal_server_error():
+        return render_template("errors/500"), 500
 
     @app.errorhandler(CSRFError)
     def handle_csrf_error(e):
-        return render_template('errors/400.html', description=e.description), 400
+        return render_template("error/400.html", description=e.description), 400
 
 
 def register_shell_context(app):

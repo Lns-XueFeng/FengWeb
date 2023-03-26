@@ -4,11 +4,11 @@ import sys
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-WIN = sys.platform.startswith('win')
+WIN = sys.platform.startswith("win")
 if WIN:
-    prefix = 'sqlite:///'
+    prefix = "sqlite:///"
 else:
-    prefix = 'sqlite:////'
+    prefix = "sqlite:////"
 
 
 class BaseConfig(object):
@@ -35,11 +35,11 @@ class DevelopmentConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
 
 
 class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", prefix + os.path.join(basedir, "data.db"))
 
 
 config = {
