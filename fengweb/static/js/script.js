@@ -10,3 +10,7 @@ btn.onclick = function(){
         btn.value = "播放";
     }
 }
+
+document.getElementById('closeBtn').onclick = function() {
+    document.getElementById('myAlert').style.display = 'none';
+}

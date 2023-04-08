@@ -19,3 +19,4 @@ Flask-Ckeditor==0.4.6
 Flask_Moment==1.0.5
 Markdown==3.4.1
 faker==17.6.0
+python-dotenv==1.0.0

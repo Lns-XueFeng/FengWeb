@@ -96,6 +96,12 @@
                         <p>&nbsp;<span class="arlo_tm_animation_text_word"></span>&nbsp;</p>
                     </div>
                 {% endblock %}
+                <div class="alert">
+                    {% for message in get_flashed_messages() %}
+{#                        <button type="button" id="closeBtn">&times;</button>#}
+                        {{ message }}
+                    {% endfor %}
+                </div>
             </div>
             {% endblock %}
             <div class="arlo_tm_arrow_wrap bounce anchor">

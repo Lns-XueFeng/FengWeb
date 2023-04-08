@@ -1,6 +1,6 @@
 import os
 
-from flask import Blueprint
+from flask import Blueprint, flash
 from flask import render_template, request, current_app
 
 from fengweb.utils import md_to_html, redirect_back
