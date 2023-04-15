@@ -7,6 +7,7 @@ from flask_wtf.csrf import CSRFError
 
 from .models import Admin, Category, Link, Post
 from .extensions import bootstrap4, db, login_manager, ckeditor, moment, csrf
+from .apis import api_bp
 from .blueprints.blog import blog_bp
 from .blueprints.admin import admin_bp
 from .blueprints.auth import auth_bp
@@ -26,6 +27,7 @@ def make_app(config_name=None):
     app.register_blueprint(blog_bp)
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(api_bp, url_prefix="/data/api/v1.0")
 
     bootstrap4.init_app(app)
     db.init_app(app)
