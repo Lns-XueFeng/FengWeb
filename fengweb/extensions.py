@@ -22,5 +22,5 @@ def load_user(user_id):
 
 
 login_manager.login_view = "auth.login"
-# login_manager.login_message ="Your custom message"
+login_manager.login_message = "欢迎来到后台管理界面"
 login_manager.login_message_category = "warning"
