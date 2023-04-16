@@ -8,9 +8,9 @@ from flask_wtf.csrf import CSRFError
 from .models import Admin, Category, Link, Post
 from .extensions import bootstrap4, db, login_manager, ckeditor, moment, csrf
 from .apis import api_bp
-from .blueprints.blog import blog_bp
-from .blueprints.admin import admin_bp
-from .blueprints.auth import auth_bp
+from .website.blog import blog_bp
+from .website.admin import admin_bp
+from .website.auth import auth_bp
 from .settings import config
 
 

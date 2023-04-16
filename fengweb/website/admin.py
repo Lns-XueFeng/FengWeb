@@ -21,7 +21,7 @@ def upload_md():
         f = form.file.data
         file_name = f.filename
         f.save(os.path.join(current_app.config["UPLOAD_MARKDOWN_PATH"], file_name))
-        flash(f"上传{file_name}成功")
+        flash(f"上传{file_name}成功！")
         session["filenames"] = [file_name]
         return redirect(url_for("blog.index"))
     return render_template("admin/upload_md.html", form=form)
@@ -49,7 +49,7 @@ def new_passage():
         category.posts.append(post)
         db.session.add(post)
         db.session.commit()
-        flash("新文章已创建")
+        flash("新文章已创建！")
         return redirect(url_for("admin.manage_passage"))
     return render_template("admin/new_passage.html", form=form)
 
@@ -64,7 +64,7 @@ def edit_passage(post_id):
         post.category = Category.query.get(form.category.data)
         post.body = form.body.data
         db.session.commit()
-        flash("文章已更新")
+        flash("文章已更新！")
         return redirect(url_for("admin.manage_passage"))
     form.title.data = post.title
     form.category.data = post.category_id
@@ -78,7 +78,7 @@ def delete_passage(post_id):
     post = Post.query.get(post_id)
     db.session.delete(post)
     db.session.commit()
-    flash("文章删除成功")
+    flash("文章删除成功！")
     return redirect_back()
 
 
@@ -101,7 +101,7 @@ def edit_message(message_id):
         message.name = form.name.data
         message.about = form.about.data
         db.session.commit()
-        flash("留言已更新")
+        flash("留言已更新！")
         return redirect(url_for("admin.manage_message"))
     form.name.data = message.name
     form.about.data = message.about
@@ -114,7 +114,7 @@ def delete_message(message_id):
     message = Message.query.get(message_id)
     db.session.delete(message)
     db.session.commit()
-    flash("留言删除成功")
+    flash("留言删除成功！")
     return redirect_back()
 
 
@@ -134,7 +134,7 @@ def new_category():
         n_category = Category(name=name)
         db.session.add(n_category)
         db.session.commit()
-        flash("新分类已创建")
+        flash("新分类已创建！")
         return redirect_back()
     return render_template("admin/new_category.html", form=form)
 
@@ -147,16 +147,19 @@ def edit_category(category_id):
     if form.validate_on_submit():
         category.name = form.name.data
         db.session.commit()
-        flash("分类已更新")
+        flash("分类已更新！")
         return redirect(url_for("admin.manage_category"))
     form.name.data = category.name
     return render_template("admin/edit_category.html", form=form)
 
 
-@admin_bp.route("/delete_category/<int:category_id>")
+@admin_bp.route("/delete_category/<int:category_id>", methods=["GET", "POST"])
 @login_required
 def delete_category(category_id):
     category = Category.query.get(category_id)
-    db.session.delete(category)
-    db.session.commit()
-    flash("分类已删除")
+    if category.id == 1:
+        flash("你不能删除默认分类！")
+        return redirect_back()
+    category.delete()
+    flash("分类已删除！")
+    return redirect_back()
