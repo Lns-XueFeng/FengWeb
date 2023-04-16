@@ -2,7 +2,7 @@ import os
 import click
 import random
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, make_response
 from flask_wtf.csrf import CSRFError
 
 from .models import Admin, Category, Link, Post
@@ -71,7 +71,7 @@ def register_commands(app):
         click.echo(f"生成ing {post} posts...")
         fake_posts(post)
 
-        click.echo("生成ing links...}")
+        click.echo("生成ing links...")
         fake_links()
 
         click.echo("生成ing name title about for notes...")
@@ -107,7 +107,7 @@ def register_commands(app):
             category = Category(name="Default")
             db.session.add(category)
 
-        db.seesion.commit()
+        db.session.commit()
         click.echo("创建完成")
 
 
@@ -139,6 +139,10 @@ def register_errors(app):
     @app.errorhandler(CSRFError)
     def handle_csrf_error(e):
         return render_template("error/400.html", description=e.description), 400
+
+    @app.errorhandler(404)
+    def not_found(error):
+        return make_response(jsonify({"data": None}))
 
 
 def register_shell_context(app):

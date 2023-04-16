@@ -1,4 +1,5 @@
-# Python语法文档
+# Python笔记文档
+本文档为Lns-XueFeng原创笔记，转载请注明作者！
 
 ## Python简介
 
@@ -3008,7 +3009,7 @@ class Spider(object):
 
 
     def theading(self,url,File_path,title):
-        '''多线程'''
+        '''2.6.并发与并行'''
         thead = Thread(target=self.parse_data,args=(url,File_path,title,))
         thead.setDaemon(True)
         thead.start()
@@ -3124,7 +3125,7 @@ if __name__ == "__main__":
 # 如果这个文件不存在就新建
 # 存在的话会覆盖
 
-f = open('test.txt','w')
+f = open('Project_tips.txt','w')
 # 这里面的w是'写'
 # 即：有w，r，wb，rb等等，w为写，r为读，wb为以二进制写入，rb为以二进制来读
 # w，r一个也没写时，默认为r读
@@ -3135,20 +3136,20 @@ f.close()  #关闭文件
 
 ```python
 # 文件的写入
-f = open("test.txt","w")
+f = open("Project_tips.txt","w")
 f.write('hello world!')   # 将字符串写入文件中
 f.close()   # 养成好习惯：有文件关闭的语句
 
 # 更保险的写入
-with open("test.txt","w") as fp:
+with open("Project_tips.txt","w") as fp:
   fp.write('hello world!')   # 使用with结构会自动打开文件和完成操作之后关闭文件
 
 # 读取操作
-f = open("test.txt","w")
+f = open("Project_tips.txt","w")
 f.write('hello world!')   # 将字符串写入文件中
 f.close()
 
-f = open("test.txt","r")   # 只读模式
+f = open("Project_tips.txt","r")   # 只读模式
 content = f.read(5)   # 读前五个字节
 print(content)
 
@@ -3157,13 +3158,13 @@ print(content)   # 这之中，要知道指针的概念，读几个就移动几�
 f.close()
 
 # 更快的读取
-f = open("test.txt","r")   # 只读模式
+f = open("Project_tips.txt","r")   # 只读模式
 content = f.readlines()
 print(content)
 f.close()
 
 # 一行一行的读
-f = open("test.txt","r")
+f = open("Project_tips.txt","r")
 content = f.readline()
 print("1:%s"%content)
 
@@ -3312,11 +3313,11 @@ with open('text.csv','r',encoding='utf-8') as csvfile:
 # 3.存储为json文件
 
 # 写入操作
-with open('test.json','w') as jsonfile:
+with open('Project_tips.json','w') as jsonfile:
     json.dump(jsonfile,data)
     
 # 读取操作
-with open('test.json') as jsonfile:
+with open('Project_tips.json') as jsonfile:
     json.loads(jsonfile)
 ```
 
@@ -3343,7 +3344,7 @@ sqlite执行流程:
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 print("Opened database successfully")
 
 # 创建游标
@@ -3367,7 +3368,7 @@ conn.close()
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 
 # 创建游标
 cursor = conn.cursor()
@@ -3393,7 +3394,7 @@ conn.close()
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 
 # 创建游标
 cursor = conn.cursor()
@@ -3425,13 +3426,13 @@ scroce_list = [('Jack',90,70),('Keye',90,60),
                ('Peac',70,70),('Quot',80,70),
                ('Iooo',70,80),('Lili',70,90),]
 # 连接数据库
-conn = sqlite.connect("test.db")
+conn = sqlite.connect("Project_tips.db")
 
 # 创建游标
 cur = conn.cursor()
 
 # 执行sql语句
-sql = "insert into test(stu_name,math_scroce,_chinese_scroce) values=(?,?,?)"
+sql = "insert into Project_tips(stu_name,math_scroce,_chinese_scroce) values=(?,?,?)"
 cur.excutemany(sql,scroce_list) #插入多条数据需要使用excutemany函数
 
 # 提交数据
@@ -3454,7 +3455,7 @@ print(cur.rowcount)
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 
 # 创建游标
 cursor = conn.cursor()
@@ -3479,7 +3480,7 @@ conn.close()
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 
 # 创建游标
 cursor = conn.cursor()
@@ -3504,7 +3505,7 @@ conn.close()
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 
 # 创建游标
 cursor = conn.cursor()
@@ -3540,7 +3541,7 @@ conn.close()
 import sqlite3
 
 # 连接数据库(如果不存在则创建)
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Project_tips.db')
 
 # 创建游标
 cursor = conn.cursor()
@@ -3932,7 +3933,7 @@ __exit__ 方法在退出运行时上下文时被调用，它负责执行『清�
 ### 多线程
 
 ```python
-# 多线程
+# 2.6.并发与并行
     #为什么使用多线程?
         #--->进程是分配资源的最小单位，一旦创建一个进程就会分配一定的资源
         #线程是程序执行的最小单位,实际上进程只负责分配资源，而利用这些资源执行程序的是线程，也就是说进程是线程的容器,
@@ -4758,24 +4759,3 @@ if __name__ == "__main__":
 
     asyncio.run(main())
 ```
-
-# Python标准库
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
