@@ -45,3 +45,12 @@ class MessageEdit(FlaskForm):
     name = StringField("名字", validators=[DataRequired(), Length(1, 20)])
     about = TextAreaField("留言", validators=[DataRequired()])
     submit = SubmitField("确认")
+
+
+class CategorySubmit(FlaskForm):
+    name = StringField("分类", validators=[DataRequired(), Length(1, 20)])
+    submit = SubmitField("确认")
+
+
+class CategoryEdit(CategorySubmit):
+    pass
