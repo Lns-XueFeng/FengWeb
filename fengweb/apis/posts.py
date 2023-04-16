@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, redirect
 
 from . import api_bp
 from ..models import Post, Category
@@ -12,7 +12,7 @@ def get_categories():
         for co in categories:
             data[f"category_{co.id}"] = {"name": co.name}
         return jsonify(data)
-    return jsonify({"categories": None})
+    return redirect("not_found")
 
 
 @api_bp.route("/query/categories/<int:category_id>", methods=["GET"])
@@ -20,7 +20,7 @@ def get_a_category(category_id):
     category = Category.query.get(category_id)
     if category:
         return jsonify({f"category_{category.id}": category.name})
-    return jsonify({f"category_{category_id}": None})
+    return redirect("not_found")
 
 
 @api_bp.route("/query/posts", methods=["GET"])
@@ -31,7 +31,7 @@ def get_posts():
         for po in posts:
             data[f"post_{po.id}"] = {"title": po.title, "body": po.body}
         return jsonify(data)
-    return jsonify({"posts": None})
+    return redirect("not_found")
 
 
 @api_bp.route("/query/posts/<int:post_id>", methods=["GET"])
@@ -39,7 +39,7 @@ def get_a_post(post_id):
     post = Post.query.get(post_id)
     if post:
         return jsonify({f"post_{post.id}": {"title": post.title, "body": post.body}})
-    return jsonify({f"post_{post_id}": None})
+    return redirect("not_found")
 
 
 # post, delete, put

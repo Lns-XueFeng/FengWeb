@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, redirect
 
 from . import api_bp
 from ..models import Message
@@ -12,7 +12,7 @@ def get_messages():
         for mo in messages:
             data[f"message_{mo.id}"] = {"name": mo.name, "about": mo.about, "time": mo.timestamp}
         return jsonify(data)
-    return jsonify({"messages": None})
+    return redirect("not_found")
 
 
 @api_bp.route("/query/messages/<int:message_id>", methods=["GET"])
@@ -22,7 +22,7 @@ def get_a_message(message_id):
         return jsonify(
             {f"message_{message_id}": {"name": message.name, "about": message.about, "time": message.timestamp}}
         )
-    return jsonify({f"message_{message_id}": None})
+    return redirect("not_found")
 
 
 # post, delete, put
