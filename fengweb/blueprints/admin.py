@@ -5,7 +5,7 @@ from flask import render_template, flash, redirect, session, url_for, request, c
 from flask_login import login_required
 
 from fengweb.extensions import db
-from fengweb.forms import UploadMarkdown, PassageSubmit, PassageEdit, MessageEdit
+from fengweb.forms import UploadMarkdown, PassageSubmit, PassageEdit, MessageEdit, CategorySubmit, CategoryEdit
 from fengweb.models import Post, Message, Category
 from fengweb.utils import redirect_back
 
@@ -49,6 +49,7 @@ def new_passage():
         category.posts.append(post)
         db.session.add(post)
         db.session.commit()
+        flash("新文章已创建")
         return redirect(url_for("admin.manage_passage"))
     return render_template("admin/new_passage.html", form=form)
 
@@ -59,13 +60,11 @@ def edit_passage(post_id):
     form = PassageSubmit()
     post = Post.query.get(post_id)
     if form.validate_on_submit():
-        title = form.title.data
-        category = Category.query.get(form.category.data)
-        body = form.body.data
-        post = Post(title=title, body=body)
-        category.posts.append(post)
-        db.session.add(post)
+        post.title = form.title.data
+        post.category = Category.query.get(form.category.data)
+        post.body = form.body.data
         db.session.commit()
+        flash("文章已更新")
         return redirect(url_for("admin.manage_passage"))
     form.title.data = post.title
     form.category.data = post.category_id
@@ -79,6 +78,7 @@ def delete_passage(post_id):
     post = Post.query.get(post_id)
     db.session.delete(post)
     db.session.commit()
+    flash("文章删除成功")
     return redirect_back()
 
 
@@ -98,11 +98,10 @@ def edit_message(message_id):
     form = MessageEdit()
     message = Message.query.get(message_id)
     if form.validate_on_submit():
-        name = form.name.data
-        about = form.about.data
-        message = Message(name=name, about=about)
-        db.session.add(message)
+        message.name = form.name.data
+        message.about = form.about.data
         db.session.commit()
+        flash("留言已更新")
         return redirect(url_for("admin.manage_message"))
     form.name.data = message.name
     form.about.data = message.about
@@ -115,6 +114,7 @@ def delete_message(message_id):
     message = Message.query.get(message_id)
     db.session.delete(message)
     db.session.commit()
+    flash("留言删除成功")
     return redirect_back()
 
 
@@ -125,19 +125,38 @@ def manage_category():
     return render_template("admin/manage_category.html", category_list=category_list)
 
 
-@admin_bp.route("/manage_category/new_category")
+@admin_bp.route("/manage_category/new_category", methods=["GET", "POST"])
 @login_required
 def new_category():
-    pass
+    form = CategorySubmit()
+    if form.validate_on_submit():
+        name = form.name.data
+        n_category = Category(name=name)
+        db.session.add(n_category)
+        db.session.commit()
+        flash("新分类已创建")
+        return redirect_back()
+    return render_template("admin/new_category.html", form=form)
 
 
-@admin_bp.route("/manage_category/edit_category/<int:category_id>")
+@admin_bp.route("/manage_category/edit_category/<int:category_id>", methods=["GET", "POST"])
 @login_required
 def edit_category(category_id):
-    pass
+    form = CategoryEdit()
+    category = Category.query.get(category_id)
+    if form.validate_on_submit():
+        category.name = form.name.data
+        db.session.commit()
+        flash("分类已更新")
+        return redirect(url_for("admin.manage_category"))
+    form.name.data = category.name
+    return render_template("admin/edit_category.html", form=form)
 
 
 @admin_bp.route("/delete_category/<int:category_id>")
 @login_required
 def delete_category(category_id):
-    pass
+    category = Category.query.get(category_id)
+    db.session.delete(category)
+    db.session.commit()
+    flash("分类已删除")
