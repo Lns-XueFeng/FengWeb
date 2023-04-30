@@ -140,10 +140,6 @@ def register_errors(app):
     def handle_csrf_error(e):
         return render_template("error/400.html", description=e.description), 400
 
-    @app.errorhandler(404)
-    def not_found(error):
-        return make_response(jsonify({"data": None}))
-
 
 def register_shell_context(app):
     @app.shell_context_processor
