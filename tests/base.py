@@ -25,3 +25,18 @@ class BaseTest(unittest.TestCase):
     def tearDown(self):
         db.drop_all()
         self.context.pop()
+
+    def login(self, username=None, password=None):
+        if username is None and password is None:
+            username="XueFeng"
+            password="123456789"
+        res = self.client.post(
+            url_for("auth.login"),
+            data={"username": "XueFeng", "password": "123456789"},
+            follow_redirects=True
+        )
+        return res
+
+    def logout(self):
+        return self.client.get(url_for("auth.logout"))
+
