@@ -38,5 +38,5 @@ class BaseTest(unittest.TestCase):
         return res
 
     def logout(self):
-        return self.client.get(url_for("auth.logout"))
+        return self.client.get(url_for("auth.logout"), follow_redirects=True)
 
