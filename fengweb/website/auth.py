@@ -13,7 +13,7 @@ auth_bp = Blueprint("auth", __name__)
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('blog.index'))
+        return redirect(url_for("blog.index"))
 
     login_form = LoginForm()
     if login_form.validate_on_submit():

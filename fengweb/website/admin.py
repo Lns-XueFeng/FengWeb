@@ -79,7 +79,7 @@ def delete_passage(post_id):
     db.session.delete(post)
     db.session.commit()
     flash("文章删除成功！")
-    return redirect_back()
+    return render_template("admin/manage_passage.html")
 
 
 @admin_bp.route("/manage_message")
@@ -115,7 +115,7 @@ def delete_message(message_id):
     db.session.delete(message)
     db.session.commit()
     flash("留言删除成功！")
-    return redirect_back()
+    return render_template("admin/manage_message.html")
 
 
 @admin_bp.route("/manage_category")
@@ -162,4 +162,4 @@ def delete_category(category_id):
         return redirect_back()
     category.delete()
     flash("分类已删除！")
-    return redirect_back()
+    return render_template("admin/manage_category.html")

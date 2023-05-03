@@ -64,7 +64,9 @@ def detail_passage(post_id):
 
 @blog_bp.route("/show_notes/<name>")
 def show_notes(name):
-    html_string = md_to_html("fengweb/static/markdown/{}.md".format(name))
+    relative_path = "static/markdown/{}.md".format(name)
+    md_abspath = os.path.join(base_dir, relative_path)
+    html_string = md_to_html(md_abspath)
     return render_template("blog/show_markdown.html", content=html_string)
 
 
