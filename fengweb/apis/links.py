@@ -1,4 +1,4 @@
-from flask import jsonify, redirect
+from flask import jsonify, redirect, url_for
 
 from . import api_bp
 from ..models import Link
@@ -12,7 +12,7 @@ def get_link():
         for lo in links:
             data[lo.name] = lo.url
         return jsonify(data)
-    return redirect("not_found")
+    return jsonify({"error": "not found"})
 
 
 @api_bp.route("/query/links/<int:link_id>", methods=["GET"])
@@ -20,7 +20,7 @@ def get_a_link(link_id):
     link = Link.query.get(link_id)
     if link:
         return jsonify({link.name: link.url})
-    return redirect("not_found")
+    return jsonify({"error": "not found"})
 
 
 # post, delete, put
