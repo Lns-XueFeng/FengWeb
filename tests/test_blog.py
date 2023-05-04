@@ -1,5 +1,4 @@
 from flask import url_for
-from faker import Faker
 
 from fengweb.extensions import db
 from fengweb.models import Notes, Post, Category, Message
@@ -10,7 +9,6 @@ class BlogTest(BaseTest):
     
     def setUp(self):
         super(BlogTest, self).setUp()
-        fake = Faker("zh_CN")
 
         notes = Notes(name="test", title="test", about="this is a test")
         category = Category(name="Default")
@@ -48,7 +46,7 @@ class BlogTest(BaseTest):
         self.assertIn("其实，人生在世，是不太需要其他人的建议的！", data)
 
     def test_detail_passage(self):
-        client = self.client.get(url_for("blog.detail_passage"))
+        client = self.client.get(url_for("blog.detail_passage", post_id=1))
         data = client.text
         self.assertIn("this is a test", data)
 
