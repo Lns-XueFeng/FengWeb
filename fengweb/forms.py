@@ -9,7 +9,7 @@ from fengweb.models import Category
 class LoginForm(FlaskForm):
     username = StringField("账号", validators=[DataRequired(), Length(1, 20)])
     password = PasswordField("密码", validators=[DataRequired(), Length(1, 128)])
-    remember = BooleanField("记住")
+    # remember = BooleanField("记住")
     submit = SubmitField("确认")
 
 

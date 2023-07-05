@@ -56,8 +56,8 @@ def fake_message():
 
 
 def set_notes():
-    name_list = ["C", "Python", "Algorithm", "Spider", "Flask", "SQL(MySQL)"]
-    about_list = ["C语言古老而强大，简单而灵活，是其他语言的基石，比如Python的底层就是C进行的实现！",
+    name_list = ["Rust", "Python", "Algorithm", "Spider", "Flask", "SQL(MySQL)"]
+    about_list = ["Rust是一门强调安全、性能和并发性的系统编程语言，它在速度媲美C++的同时又防止了开发者对内存的误操作行为！",
                   "Python是人人都能学会的编程语言，本笔记包含Python简介，Python基础，Python进阶以及常用的库！",
                   "编程语言只是我们的武器和招式，但数据结构和算法却是我们的内力，武器再好招式再多也比不过内力雄厚的至强之人！",
                   "通过写爬虫你可以爬取海量的数据，文章、图片、音乐甚至是视频，所见即所得！",

@@ -3,10 +3,26 @@
 
 {% block title %} Pie | Login {% endblock %}
 
-{% block login %}
-    <div class="content">
-        {{ render_form(login_form) }}
-    </div>
-{% endblock %}
+{% block name %} <h3>管理员 <span>登陆</span></h3> {% endblock %}
 
-{% block banquan %} {% endblock %}
+{% block content %}
+
+<div class="arlo_tm_section" id="services">
+	<div class="arlo_tm_services">
+		<div class="container">
+			<div class="arlo_tm_main_title" style="text-align:center">
+				<div style="text-align:center">
+                    <hr>
+                    <div>
+						<div class="service_inner">
+                            {{ render_form(login_form) }}
+                            <br><br><hr>
+						</div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
