@@ -49,4 +49,3 @@ class CommandTest(BaseTest):
         self.assertIn("此管理员已存在, 更新ing...", result.output)
         self.assertIn("创建默认分类...", result.output)
         self.assertIn("创建完成", result.output)
-

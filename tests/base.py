@@ -28,8 +28,8 @@ class BaseTest(unittest.TestCase):
 
     def login(self, username=None, password=None):
         if username is None and password is None:
-            username="XueFeng"
-            password="123456789"
+            username = "XueFeng"
+            password = "123456789"
         res = self.client.post(
             url_for("auth.login"),
             data={"username": "XueFeng", "password": "123456789"},
@@ -39,4 +39,3 @@ class BaseTest(unittest.TestCase):
 
     def logout(self):
         return self.client.get(url_for("auth.logout"), follow_redirects=True)
-
