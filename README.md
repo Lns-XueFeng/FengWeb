@@ -1,5 +1,5 @@
 ## FengWeb
-Lns-XueFeng的个人网站，利用Python-Flask、Jinja2、Bootstrap进行搭建！
+FengWeb是一个博客网站，利用Python-Flask、Jinja2、Bootstrap进行搭建！
 - flask_sqlalchemy: 操作数据库
 - flask_login: 实现后台的登录
 - flask_ckeditor: 实现富文本编辑器
